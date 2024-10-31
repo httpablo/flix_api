@@ -32,3 +32,5 @@ class GlobalDefaultPermission(permissions.BasePermission):
 			'OPTIONS': 'view',
 			'HEAD': 'view',
 		}
+
+		return method_actions.get(method, '')
