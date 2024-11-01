@@ -20,7 +20,7 @@ class MovieCreateListView(generics.ListCreateAPIView):
 class MovieRetriveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Movie.objects.all()
-    
+
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return MovieListDetailSerializer
