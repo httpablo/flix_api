@@ -1,29 +1,30 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from app.permissions import GlobalDefaultPermission
 from genres.models import Genre
 from genres.serializers import GenreSerializer
 
 
 class GenreCreateListView(generics.ListCreateAPIView):
-	permission_classes = (IsAuthenticated,)
-	queryset = Genre.objects.all()
-	serializer_class= GenreSerializer
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission)
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
 
 
 class GenreRetriveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-	permission_classes = (IsAuthenticated,)
-	queryset = Genre.objects.all()
-	serializer_class= GenreSerializer
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission)
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
 
 
-#Exemplos sem DRF
+# Exemplos sem DRF
 # @csrf_exempt
 # def genre_create_list_view(request):
 # 	if request.method == 'GET':
 # 		genres = Genre.objects.all()
 # 		data = [{'id': genre.id, 'name': genre.name} for genre in genres]
 # 		return JsonResponse(data, safe=False)
-	
+
 # 	elif request.method == 'POST':
 # 		data = json.loads(request.body.decode('utf-8'))
 # 		new_genre = Genre(name=data['name'])
@@ -32,7 +33,7 @@ class GenreRetriveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 # 			{'id': new_genre.id, 'name': new_genre.name},
 # 			status=201,
 # 			)
-	
+
 
 # @csrf_exempt
 # def genre_detail_view(request, pk):
@@ -40,7 +41,7 @@ class GenreRetriveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 # 	if request.method == 'GET':
 # 		data = {'id': genre.id, 'name': genre.name}
 # 		return JsonResponse(data)
-	
+
 # 	elif request.method == 'PUT':
 # 		data = json.loads(request.body.decode('utf-8'))
 # 		genre.name = data['name']
@@ -48,7 +49,7 @@ class GenreRetriveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 # 		return JsonResponse(
 # 			{'id': genre.id, 'name': genre.name}
 # 			)
-	
+
 # 	elif request.method == 'DELETE':
 # 		genre.delete()
 # 		return JsonResponse(
